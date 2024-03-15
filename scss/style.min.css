@@ -21,7 +21,7 @@ span.note {color : blueviolet; }
 
 h4.widget-title2{
 
-    border-style:double 
+    border-style:double; 
     display: inline-block;
     border-top:.5px solid #00aaa1;
     border-bottom:.5px solid #00aaa1;
