@@ -14,6 +14,8 @@ button{
     margin-bottom: 20px
 }
 
+span.switch {color : rgb(21, 161, 21); }
+
 h5{
     background-color: yellow;
 }
