@@ -27,12 +27,16 @@ function myFunction() {
   
 function myFunctionP() {
     var menu = document.getElementById("sidebar");
+    var links = document.querySelectorAll(".popup-menu a");
     var icon = document.getElementById("toggleIcon").src; // 修改此行，將 icon 變數設置為圖片元素的 src 屬性
 
     if (menu.style.display === "none" || menu.style.display === "") {
         menu.style.display = "block";
         //icon.src = "redcross.png"; // 顯示時切換為 X 圖示
         document.getElementById('toggleIcon').src  = 'redcross.png';
+        links.forEach(function(link) {
+            link.style.display = "block";
+        });
     } else {
         menu.style.display = "none";
         //icon.src = "burgericon.png"; // 隱藏時切換為漢堡圖示

@@ -19,6 +19,10 @@ button {
     display: none;
 }
 
+.popup-menu a {
+    display: none;
+}
+
 /*
 body {
     display: flex;
@@ -130,8 +134,11 @@ body {
 .box i {
     position: absolute;
     top: 0%;
-    font-size: 100px; 
-    z-index: 999;
+    right: 0%;
+    font-size: 24px; 
+    z-index: 998;
+    color: goldenrod;
+    padding: 8px;
 }
 
 .overlay-text {
@@ -239,9 +246,11 @@ body {
         display: flex;
         flex-direction: column; /* 垂直排列 */
         align-items: flex-start; /* 對齊到容器的起始位置 */
+        border: solid blach 5px;
     }
     
     .popup-menu a {
+        display: none;
         padding: 20px 8px;
         width: 100%;
     }
@@ -254,25 +263,3 @@ body {
 
 }
 
-.button-container {
-    display: inline-block;
-    cursor: pointer;
-  }
-  
-  .bar1, .bar2, .bar3 {
-    width: 35px;
-    height: 5px;
-    background-color: #333;
-    margin: 6px 0;
-    transition: 0.4s;
-  }
-  
-  .change .bar1 {
-    transform: translate(0, 11px) rotate(-45deg);
-  }
-  
-  .change .bar2 {opacity: 0;}
-  
-  .change .bar3 {
-    transform: translate(0, -11px) rotate(45deg);
-  }
