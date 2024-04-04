@@ -15,34 +15,58 @@ ul,li {
     display: inline;
 }
 
+/*
+body {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0; 
+    border:dashed greenyellow
+}
+*/
+
+#wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
 #intro {
     height: 250px;
+    width: 100%;
     background-color: #e1ebf2;
     display: flex;
     justify-content: center;
-    
+    align-items: center;
 }
 
-#container {
-    width: 1200px;
 
+#container {
+    max-width: 1200px;
+    border: solid pink 10px;
+    margin-top: 20px;
 }
 
 .promotion {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items : center;
 }
 
 .smallbox {
-    height: 50px;
+    
     display: inline-flex;
-    border: solid red;
+     /*border: solid red; */
+    width: 100%;
 }
 
-img .smallbox {
-    width: 80px;
+.smallbox img {
+    max-height: 50px;
+    max-width: 80px;
+    margin: 1%;
 }
 
 .box i {
@@ -52,30 +76,58 @@ img .smallbox {
 
 .container2 {
     display: flex;
+    flex-direction:row;
+    border: solid blue;
+    background-color:antiquewhite;
+    max-height: auto;
 }
 
-.column {
-    width: 16%; /* 5 columns */
+
+.container2 .column {
+    width: 16%; /* 4 columns */
     display: flex;
     flex-direction: column;
+    max-width: 200px;
+    max-height:100%;
+    flex:1 1;
+    overflow: hidden;
 }
-  
-.first-column {
-    width: 33%; /* First column is twice wider */
+ 
+.container2 .column-1st {
+    width: 33%; /* First column is 33% of container2 */
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    max-height:100%;
+    flex:2 2;
+    overflow: hidden;
 }
-  
-.box p {
+
+
+.container2 .box img {
+    width:100%; /* 確保圖片填滿父容器 */
+    height:100%; /* 確保圖片填滿父容器 */
+    object-fit: cover; /* 使圖片比例不變並裁切超出部分 */
+}
+
+
+.box {
+    position: relative;
+     /*border: solid goldenrod;*/
+    height:100%;
+    margin: 1%;
+}
+
+.overlay-text {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent background */
+    width:100%;
+    bottom: 0%; /* 距離圖片上緣的距離 */
+    color: rgb(0, 0, 0);
     text-align: center;
-    line-height: 1.5;
-  }
-
-
+    background-color: rgba(229, 222, 86, 0.5); /* 背景顏色及透明度 */
+    padding: 5px; /* 文字框內的間距 */
+    margin: 0; /* 去除預設邊距 */
+}
 
 @media (max-width: 768px){
     nav ul {
