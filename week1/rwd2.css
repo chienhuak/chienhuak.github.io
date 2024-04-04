@@ -1,0 +1,278 @@
+nav {
+    font-size: 20px;
+    display : flex;
+    justify-content: space-between;
+    align-items : center;
+}
+
+ul {
+    display : flex;
+    max-width: 50%;
+    justify-content: space-evenly;
+}
+
+ul,li {
+    display: inline;
+}
+
+button {
+    display: none;
+}
+
+/*
+body {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0; 
+    border:dashed greenyellow
+}
+*/
+
+#wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#intro {
+    height: 250px;
+    width: 100%;
+    background-color: #e1ebf2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#container {
+    max-width: 1200px;
+    /*border: solid pink 10px;*/
+    margin-top: 20px;
+}
+
+
+.promotion {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items : center;
+}
+
+.smallbox {
+    
+    display: inline-flex;
+     /*border: solid red; */
+    width: 100%;
+    background-color: #a8d8e3;
+    margin: 0.5%;
+    box-sizing: margin-box;
+}
+
+.smallbox p {
+    padding-left: 10px;
+}
+
+.smallbox img {
+    max-height: 50px;
+    max-width: 80px;
+    
+}
+
+
+.content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /*border: solid red 5px;*/
+    flex: 1 1;
+}
+
+.content .row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+
+.box {
+    min-width: 16%;
+    display: inline-flexbox;
+    justify-content: space-between;
+    /*margin: 0.5%;*/
+    border: solid white 6px;
+    position: relative;
+    flex: 1;
+    box-sizing: border-box;
+}
+
+.box:first-child {
+    min-width: 33%; /* 將 .box 元素内的圖片寬度設置為其他寬度的兩倍 */
+    flex:2;
+    /* border: solid rosybrown 3px;*/
+}
+
+.box:nth-child(6) {
+    min-width: 33%; /* 將 .box 元素内的圖片寬度設置為其他寬度的兩倍 */
+    flex:2;
+    /* border: solid rosybrown 3px;*/
+}
+
+.content .box img {
+    width:100%; /* 確保圖片填滿父容器 */
+    height:100%; /* 確保圖片填滿父容器 */
+    object-fit: cover; /* 使圖片比例不變並裁切超出部分 */
+}
+
+.box i {
+    position: absolute;
+    top: 0%;
+    font-size: 100px; 
+    z-index: 999;
+}
+
+.overlay-text {
+    position: absolute;
+    width:100%;
+    bottom: 0%; /* 距離圖片下緣的距離 */
+    color: rgb(0, 0, 0);
+    text-align: center;
+    background-color: rgba(229, 222, 86, 0.5); /* 背景顏色及透明度 */
+    padding: 5px 0px; /* 文字框內的間距 */
+    margin: 0;
+}
+
+
+
+
+@media (max-width: 1200px){
+
+    #container {
+        width: 90%;
+    }
+
+    .promotion {
+        flex-wrap: wrap;
+    }
+    .smallbox {
+    
+        display: inline-flex;
+         /*border: solid red; */
+        width: 49%;
+    }
+    .promotion > .smallbox:last-child {
+    
+        display: inline-flex;
+         /*border: solid red; */
+        width: 100%;
+    }
+
+    .box {
+        min-width: 25%; 
+        flex:1;
+    }
+
+    .box:first-child {
+        min-width: 25%; 
+        flex:1;
+    }
+
+    .box:nth-child(6) {
+        min-width: 25%; 
+        flex:1;
+    }
+
+
+}
+
+
+
+
+@media (max-width: 600px){
+    nav ul {
+        display: none;
+    }
+    
+
+   .popup-btn {
+        display: block;
+        background-color: lavender;
+        border: solid pink;
+        border-radius: 10px;
+        padding: 0;
+        width:45px;
+        margin: 5px 0px;
+        z-index: 1000;
+    }
+    
+    .popup-btn img {
+        width: 100%;
+    }
+
+    .smallbox {
+        width: 100%;
+    }
+    .box {
+        min-width: 100%; 
+    }
+
+
+    .sidebar {
+        display: none;
+        flex-direction: column;
+        height: 100%;
+        width: 100px;
+        position: fixed;
+        top: 0;
+        right: 0;
+        background-color: #ffffff;
+        padding: 20px;
+        border:dotted pink 5px;
+        z-index: 999;
+        flex-wrap: wrap;
+    }
+
+    .popup-menu {
+        display: flex;
+        flex-direction: column; /* 垂直排列 */
+        align-items: flex-start; /* 對齊到容器的起始位置 */
+    }
+    
+    .popup-menu a {
+        padding: 20px 8px;
+        width: 100%;
+    }
+
+    /* 鼠标悬停时链接背景颜色 */
+    .popup-menu a:hover {
+        background-color: rgba(0,0,0,0.2);
+    }
+    
+
+}
+
+.button-container {
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .bar1, .bar2, .bar3 {
+    width: 35px;
+    height: 5px;
+    background-color: #333;
+    margin: 6px 0;
+    transition: 0.4s;
+  }
+  
+  .change .bar1 {
+    transform: translate(0, 11px) rotate(-45deg);
+  }
+  
+  .change .bar2 {opacity: 0;}
+  
+  .change .bar3 {
+    transform: translate(0, -11px) rotate(45deg);
+  }

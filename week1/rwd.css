@@ -49,6 +49,7 @@ body {
     margin-top: 20px;
 }
 
+
 .promotion {
     display: flex;
     flex-direction: row;
@@ -61,12 +62,19 @@ body {
     display: inline-flex;
      /*border: solid red; */
     width: 100%;
+    background-color: #a8d8e3;
+    margin: 0.5%;
+    box-sizing: margin-box;
+}
+
+.smallbox p {
+    padding-left: 10px;
 }
 
 .smallbox img {
     max-height: 50px;
     max-width: 80px;
-    margin: 1%;
+    
 }
 
 .box i {
@@ -129,7 +137,39 @@ body {
     margin: 0; /* 去除預設邊距 */
 }
 
-@media (max-width: 768px){
+
+
+
+@media (max-width: 1200px){
+    .promotion {
+        flex-wrap: wrap;
+    }
+    .smallbox {
+    
+        display: inline-flex;
+         /*border: solid red; */
+        width: 49%;
+    }
+    .promotion > .smallbox:last-child {
+    
+        display: inline-flex;
+         /*border: solid red; */
+        width: 100%;
+    }
+    .container2 {
+        flex-direction:column;
+    }
+    .column,
+    .column-1st {
+        display: flex;
+        flex-direction:row;
+    }
+
+}
+
+
+
+@media (max-width: 600px){
     nav ul {
         flex-direction: column;
     }
