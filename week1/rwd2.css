@@ -42,7 +42,7 @@ html {
 
 #wrapper {
     display: flex;
-    flex-direction: column;
+    /*flex-direction: column;*/
     justify-content: center;
     align-items: center;
     height: 100%;
@@ -67,7 +67,7 @@ html {
     margin-top: 20px;
 }
 
-
+/*==================
 .promotion {
     display: flex;
     flex-direction: row;
@@ -75,14 +75,15 @@ html {
     align-items : center;
 }
 
+
 .smallbox {
     
     display: inline-flex;
-     /*border: solid red; */
+    border: solid red 10px; 
     width: 100%;
     background-color: #a8d8e3;
-    margin: 0.5%;
-    box-sizing: margin-box;
+    
+    box-sizing: border-box;
 }
 
 .smallbox p {
@@ -94,13 +95,58 @@ html {
     max-width: 80px;
     
 }
+*/
+
+.promotion {
+    display: grid;
+    width: 1200px;
+    grid-template-columns: 1fr 1fr 1fr;
+    /**border: dashed gold 5px;
+    box-sizing: border-box;**/
+}
+
+.promotion div {
+    border: solid white 10px;
+}
+
+.smallbox {
+    display: flex;
+    background-color: #a8d8e3;
+}
+
+.smallbox img {
+    height:100%;
+    width: 100%;
+    max-height: 50px;
+    max-width: 80px;
+    object-fit: cover;
+    border: 0px;
+}
+
+.smallbox p {
+    padding-left: 10px;
+    width: 100%;
+}
 
 
+  
+.content .row {
+  display: grid;
+  width: 1200px;
+  width: 100%;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+}
+ 
+.content .box {
+  position: relative;
+  border: solid white 10px;
+}
+
+/*
 .content {
     display: flex;
     flex-direction: column;
     width: 100%;
-    /*border: solid red 5px;*/
     flex: 1 1;
 }
 
@@ -111,29 +157,28 @@ html {
     flex-wrap: wrap;
 }
 
-
 .box {
     min-width: 16%;
     display: inline-flexbox;
     justify-content: space-between;
-    /*margin: 0.5%;*/
-    border: solid white 6px;
+    border: solid plum 10px;
     position: relative;
     flex: 1;
     box-sizing: border-box;
 }
 
 .box:first-child {
-    min-width: 33%; /* 將 .box 元素内的圖片寬度設置為其他寬度的兩倍 */
+    min-width: 33%; 
     flex:2;
-    /* border: solid rosybrown 3px;*/
+
 }
 
 .box:nth-child(6) {
-    min-width: 33%; /* 將 .box 元素内的圖片寬度設置為其他寬度的兩倍 */
+    min-width: 33%; 
     flex:2;
-    /* border: solid rosybrown 3px;*/
 }
+*/
+
 
 .content .box img {
     width:100%; /* 確保圖片填滿父容器 */
@@ -172,18 +217,36 @@ html {
     }
 
     .promotion {
-        flex-wrap: wrap;
+        display: grid;
+        width: 100%;
+        grid-template-columns: auto auto;
     }
+
+    .smallbox:nth-child(3) {
+        grid-column: span 2; /* 跨二欄 */
+    }
+
+    .content .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+
+    .box:nth-child(9), .box:nth-child(10) {
+        grid-column: span 2; /* 跨二欄 */
+    }
+    
+
+    /*
     .smallbox {
     
         display: inline-flex;
-         /*border: solid red; */
+
         width: 49%;
     }
     .promotion > .smallbox:last-child {
     
         display: inline-flex;
-         /*border: solid red; */
+
         width: 100%;
     }
 
@@ -201,7 +264,7 @@ html {
         min-width: 25%; 
         flex:1;
     }
-
+    */
 
 }
 
@@ -229,11 +292,32 @@ html {
         width: 100%;
     }
 
+    /*
     .smallbox {
         width: 100%;
     }
     .box {
         min-width: 100%; 
+    }
+    */
+
+    .promotion {
+        display: grid;
+        width: 100%;
+        grid-template-columns: 1fr;
+    }
+
+    .smallbox:nth-child(n) {
+        grid-column: span 1;
+    }
+
+    .content .row {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .box:nth-child(n) {
+        grid-column: span 1;
     }
 
 
