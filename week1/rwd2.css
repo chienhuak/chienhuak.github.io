@@ -3,6 +3,7 @@ nav {
     display : flex;
     justify-content: space-between;
     align-items : center;
+    padding: 1%;
 }
 
 ul {
@@ -23,15 +24,21 @@ button {
     display: none;
 }
 
-/*
+
 body {
     display: flex;
     justify-content: center;
     flex-direction: column;
     margin: 0; 
-    border:dashed greenyellow
+    /*border:dashed greenyellow 5px;*/
 }
-*/
+
+
+html {
+    margin: 0;
+    /*border: solid pink 5px;*/
+}
+
 
 #wrapper {
     display: flex;
@@ -39,6 +46,8 @@ body {
     justify-content: center;
     align-items: center;
     height: 100%;
+    /*border: solid orange 5px;*/
+    
 }
 
 #intro {
@@ -48,6 +57,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    
 }
 
 
@@ -237,7 +247,7 @@ body {
         right: 0;
         background-color: #ffffff;
         padding: 20px;
-        border:dotted pink 5px;
+        border-left: solid pink 1px;
         z-index: 999;
         flex-wrap: wrap;
     }
