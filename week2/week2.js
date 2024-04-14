@@ -1,0 +1,200 @@
+
+
+//Task 2:
+
+// your code here, maybe
+function book(consultants, hour, duration, criteria){
+    // your code here
+    consultants.forEach(element => {
+        if (!element.hasOwnProperty('time')){
+            element['time']= [];
+            //console.log(element)
+        }
+    });
+
+    let avaliables = []
+    consultants.forEach(element => {
+        avaliables.push(element['name'])}    ) //所有顧問清單
+    //console.log(avaliable)
+
+    //找到有空顧問
+    for (t=hour;t<hour+duration;t++){
+        consultants.forEach(consultant => {
+            if (consultant.time.includes(t)){    //不能用in檢查
+                const index = avaliables.indexOf(consultant.name);
+                if (index !== -1) {
+                    avaliables.splice(index, 1); // 使用 splice() 方法刪除指定索引的元素 (修正:avaliables.pop(consultant)注意:pop()只能移除最後一項，無法指定移除的東西)
+                }
+            }
+        });
+    }
+    //console.log(avaliables)  //檢查：
+
+    //沒有顧問的情況
+    if (avaliables.length === 0){     //使用 avaliables == [] 比較，不會產生預期的結果 (因為是比較 "存儲在變數中的記憶體位置")
+        console.log("No Service")
+        return;
+    }
+
+    
+
+    //判斷價格條件
+    if (criteria="price"){
+        //尋找有空顧問最低價格
+        let avaPrices = []
+        avaliables.forEach(element1 => {
+            consultants.forEach(element2 =>{
+                if (element1 == element2.name){
+                    avaPrices.push(element2.price) 
+                    //console.log(element2.price) //檢查：新增正確的值
+                }
+            }
+        )
+        }
+        )
+        //console.log(avaPrices)
+        //console.log(Math.min(...avaPrices))  //檢查min值：因為Math.mim()的參數必須是數字，將展開運算符傳給Math.mim()
+        minPrice = Math.min(...avaPrices) //找到最低價格
+
+        consultants.forEach(element => {
+            if (element.price == minPrice){    //依最低價格推算出顧問名稱，將該顧問時間預定
+                console.log(element.name)
+                element.time.push(hour)
+                if (duration >1 ){
+                    for (t=1;t<duration;t++){
+                        hour += 1
+                        element.time.push(hour)
+                    }
+                }           
+            }
+        })
+        
+    }
+
+    //判斷評分條件
+    if (criteria="rate"){
+        //尋找有空顧問最高分
+        let avaRates = []
+        avaliables.forEach(element1 => {
+            consultants.forEach(element2 =>{
+                if (element1 == element2.name){
+                    avaRates.push(element2.price) 
+                }
+            }
+        )
+        }
+        )
+
+        maxRate = Math.max(...avaRates) 
+
+        consultants.forEach(element => {
+            if (element.rate == maxRate){    
+                console.log(element.name)
+                element.time.push(hour)
+                if (duration >1 ){
+                    for (t=1;t<duration;t++){
+                        hour += 1
+                        element.time.push(hour)
+                    }
+                }           
+            }
+        })
+        
+    }
+
+
+    //console.log(consultants)
+
+    }
+    const consultants=[
+    {"name":"John", "rate":4.5, "price":1000},
+    {"name":"Bob", "rate":3, "price":1200},
+    {"name":"Jenny", "rate":3.8, "price":800}
+    ];
+    book(consultants, 15, 1, "price"); // Jenny
+    book(consultants, 11, 2, "price"); // Jenny
+    book(consultants, 10, 2, "price"); // John
+    book(consultants, 20, 2, "rate"); // John
+    book(consultants, 11, 1, "rate"); // Bob
+    book(consultants, 11, 2, "rate"); // No Service
+    book(consultants, 14, 3, "price"); // John
+
+
+//Task 3:
+
+function func(...data){
+    // your code here
+    rule = {2:1,3:1,4:2,5:2}; //名字字數與索引
+    
+    let words = [];
+    for (i=0;i<data.length;i++){
+        digit = data[i].length;  //名字長度
+        middle = rule[digit];  //中間位置index
+        words.push(data[i][middle]); //將中間字存到新的陣列
+        
+        //console.log(word);
+    }
+    //console.log(words);
+    
+    let freq = {};      //計算每個元素的出現次數
+    words.forEach(element => {
+        if (element in freq){
+            freq[element] +=1;
+        }
+        else {
+            freq[element] = 1;
+        }
+        
+    });
+    
+    //console.log(freq)
+
+    let check = false;
+    words.forEach(word => {
+        if (freq[word]==1){
+            index = words.indexOf(word)
+            console.log(data[index])  //印出"中間名"特別的人
+            check = true;
+        }
+    })
+
+    if (check == false){
+        console.log("沒有")
+    }
+}
+
+func("彭大牆", "陳王明雅", "吳明"); // print 彭大牆
+func("郭靜雅", "王立強", "郭林靜宜", "郭立恆", "林花花"); // print 林花花
+func("郭宣雅", "林靜宜", "郭宣恆", "林靜花"); // print 沒有
+func("郭宣雅", "夏曼藍波安", "郭宣恆"); // print 夏曼藍波安
+
+
+//Task 4:尋找數列規則 0, 4, 8, 7, 11, 15, 14, 18, 22, 21, 25, ...
+
+function getNumber(index){
+    // your code here
+    let sum = 0;
+    for (let i=1;i<index+1;i++){
+        if ((i)%3==0){
+            sum=sum-1; 
+        }
+        else {
+            sum=sum+4;  
+        }
+    
+    }
+    console.log(sum);    
+}
+getNumber(1); // print 4
+getNumber(5); // print 15
+getNumber(10); // print 25
+getNumber(30); // print 70
+
+// //Task 5 (Optional):
+
+// function find(spaces, stat, n){
+//     // your code here
+//     }
+//     find([3, 1, 5, 4, 3, 2], [0, 1, 0, 1, 1, 1], 2); // print 5
+//     find([1, 0, 5, 1, 3], [0, 1, 0, 1, 1], 4); // print -1
+//     find([4, 6, 5, 8], [0, 1, 1, 1], 4); // print 2
