@@ -1,3 +1,68 @@
+//Task 1
+
+function findAndPrint(messages, currentStation){
+    // your code here
+
+    const stations = ['Xindian','Xindian City Hall','Qizhang','Xiaobitan','Dapinglin','Jingmei','Wanlong','Gongguan','Taipower Building','Guting','Chiang Kai-Shek Memorial Hall','Xiaonanmen','Ximen','Beimen','Zhongshan','Songjiang Nanjing','Nanjing Fuxing','Taipei Arena','Nanjing Sanmin','Songshan'];
+
+    //擷取訊息
+    const extractedMessages = {};
+
+    for (const [name, message] of Object.entries(messages)) {   // 每個 messages 物件中的鍵值對
+        for (const station of stations) {    // 每個站名，使用正則表達式來匹配站名
+            const regex = new RegExp(station, 'gi'); // 不區分大小寫、全域匹配
+            if (regex.test(message)) {
+                extractedMessages[name] = station;
+            }
+        }
+    }
+    //console.log(extractedMessages);   //檢查擷取的訊息
+    //console.log(extractedMessages.Vivian);   //取得Vivian的車站
+
+
+    //算出我的位置
+    for (let i=0;i<stations.length;i++){
+        if (currentStation.includes(stations[i])){
+            myloc = i;
+        }
+    };
+    //console.log(myloc);
+    //console.log("我的車站："+stations[myloc]+"我的索引："+myloc);
+
+    //計算最近的距離
+    descS = []
+
+    //字典不能用forEach
+    // extractedMessages.forEach(element => {
+    //     desc = Math.abs(stations.indexOf(extractedMessages.element)-myloc)
+    //     descS.push(desc)      
+    // });
+
+    const keys = Object.keys(extractedMessages);
+
+    descS = []
+    for (i=0;i<keys.length;i++){
+        desc = Math.abs(stations.indexOf(extractedMessages[keys[i]])-myloc)   //不能寫stations.indexOf(extractedMessages.keys[i])
+        descS.push(desc)
+    }
+    //console.log(Math.min(...descS))
+    console.log(keys[descS.indexOf(Math.min(...descS))])   //距離最近的人
+
+}
+    const messages={
+    "Bob":"I'm at Ximen MRT station.",
+    "Mary":"I have a drink near Jingmei MRT station.",
+    "Copper":"I just saw a concert at Taipei Arena.",
+    "Leslie":"I'm at home near Xiaobitan station.",
+    "Vivian":"I'm at Xindian station waiting for you."
+    //,"John": "I'm at Xindian City Hall waiting for you."
+    };
+    findAndPrint(messages, "Wanlong"); // print Mary
+    findAndPrint(messages, "Songshan"); // print Copper
+    findAndPrint(messages, "Qizhang"); // print Leslie
+    findAndPrint(messages, "Ximen"); // print Bob
+    findAndPrint(messages, "Xindian City Hall"); // print Vivian
+
 
 
 //Task 2:
