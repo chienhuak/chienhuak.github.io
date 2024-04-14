@@ -1,4 +1,64 @@
-#Task 1:最近的車站
+print()
+print("#Task 1-1 (優化):新增支線情況")
+
+stations = [{"n":'Xindian',"idx":0}, {"n":'Xindian City Hall',"idx":1}, {"n":'Qizhang',"idx":2}, {"n":'Dapinglin',"idx":3},
+            {"n":'Xiaobitan',"idx":1, "branch":"Qizhang"}, {"n":'Jingmei',"idx":4},{"n":'Wanlong',"idx":5}, {"n":'Gongguan',"idx":6},
+            {"n":'Taipower Building',"idx":7}, {"n":'Guting',"idx":8}, {"n":'Chiang Kai-Shek Memorial Hall',"idx":9},
+            {"n":'Xiaonanmen',"idx":10}, {"n":'Ximen',"idx":11}, {"n":'Beimen',"idx":12}, {"n":'Zhongshan',"idx":13},
+            {"n":'Songjiang Nanjing',"idx":14}, {"n":'Nanjing Fuxing',"idx":15}, {"n":'Taipei Arena',"idx":16},
+            {"n":'Nanjing Sanmin',"idx":17}, {"n":'Songshan',"idx":18}]
+
+
+def distance(s, t):   # s:start t:destination
+  #s = next((x for x in stations if x["n"]==staA), None)
+  #t = next((x for x in stations if x["n"]==staB), None)
+  sb=None
+  tb=None
+  if "branch" in s :
+    sb = next((x for x in stations if x["n"]==s["branch"]), None)
+  if "branch" in t:
+    tb = next((x for x in stations if x["n"]==t["branch"]), None)
+
+  if sb is None:
+    if tb is None:
+      return abs(s["idx"]-t["idx"])
+    else:
+      return abs(s["idx"]-tb["idx"])+t["idx"]
+  else:
+    if tb is None:
+      return abs(sb["idx"]-t["idx"])+s["idx"]
+    else:
+      return abs(sb["idx"]-tb["idx"])+s["idx"]+t["idx"]
+
+
+def find_and_print_plus(messages, current_station):
+  start_info = next((x for x in stations if x["n"]==current_station), None)
+  #print(start_info)
+  msg_info = [{'name':x, 'current_station':next((s for s in stations if messages[x].find(s["n"])>=0), None)} for x in messages]
+  #print(msg_info)
+  near = min(msg_info, key=lambda x: distance(x["current_station"],start_info))
+  print(near["name"])
+
+    
+messages={
+"Leslie":"I'm at home near Xiaobitan station.",
+"Bob":"I'm at Ximen MRT station.",
+"Mary":"I have a drink near Jingmei MRT station.",
+"Copper":"I just saw a concert at Taipei Arena.",
+"Vivian":"I'm at Xindian station waiting for you."
+}
+    
+find_and_print_plus(messages, "Wanlong") # print Mary
+find_and_print_plus(messages, "Songshan") # print Copper
+find_and_print_plus(messages, "Qizhang") # print Leslie
+find_and_print_plus(messages, "Ximen") # print Bob
+find_and_print_plus(messages, "Xindian City Hall") # print Vivian
+find_and_print_plus(messages, "Dapinglin") # print Mary
+
+
+print()
+print("#Task 1:最近的車站")
+
 
 def find_and_print(messages, current_station):
   # your code here
@@ -52,8 +112,9 @@ find_and_print(messages, "Ximen") # print Bob
 find_and_print(messages, "Xindian City Hall") # print Vivian
 
 
+print()
+print("#Task 2:預定當天諮詢、依條件推薦合適顧問")
 
-#Task 2:預定當天諮詢、依條件推薦合適顧問
 
 consultants=[
 {"name":"John", "rate":4.5, "price":1000},
@@ -129,8 +190,9 @@ book(consultants, 11, 2, "rate") # No Service
 book(consultants, 14, 3, "price") # John
 
 
+print()
+print("#Task 3:尋找中間名進行比對")
 
-#Task 3:尋找中間名進行比對
     
 def func(*data):
     # your code here
@@ -156,8 +218,9 @@ func("郭宣雅", "夏曼藍波安", "郭宣恆") # print 夏曼藍波安
     
     
     
+print()
+print("#Task 4:尋找數列規則 0, 4, 8, 7, 11, 15, 14, 18, 22, 21, 25, ...")
 
-#Task 4:尋找數列規則 0, 4, 8, 7, 11, 15, 14, 18, 22, 21, 25, ...
 
 def get_number(index):
     # your code here
@@ -173,8 +236,9 @@ get_number(30) # print 70
 
 
 
+print()
+print("#Task 5 (Optional):訂車票")
 
-#Task 5 (Optional):訂車票
 
 
 def find(spaces, stat, n):
