@@ -71,6 +71,45 @@ with open(csv_file, 'w') as f:
       except KeyError as e:
         print(f"KeyError occurred: {e}. Skipping this row.")
 
-print("CSV 文件已創建成功！")
+print("spot.csv 文件已創建成功！")
+
+#mrt.csv
+#export format : StationName,AttractionTitle1,AttractionTitle2,AttractionTitle3,...
+#export example : 新北投,新北投溫泉區,北投圖書館,地熱谷,...
+
+#對每一個景點
+for i in range (0,len(mrts)):
+  mrts[i]["atts"]=[]
+
+for att in attractions:
+  try:
+    #print(att)
+    for i in range (0,len(mrts)):
+      if mrts[i]["MRT"]==att["mrt"]:
+        mrts[i]["atts"].append(att["stitle"])
+
+  except KeyError as e:
+    print(f"KeyError occurred: {e}. Skipping this row.")
+
+
+
+#設置要寫入的CSV文件名稱
+mrt_csv_file = 'mrt.csv'
+
+#打開CSV文件並寫入數據   #with open(filename, mode)
+
+with open(mrt_csv_file, 'w') as f:
+    for row in mrts:
+      try:
+        #atts_str = ", ".join(row["atts"])
+        line = f"{row['MRT']}, {', '.join(row['atts'])}" + '\n'
+        print(line)
+        f.write(line)
+      except KeyError as e:
+        print(f"KeyError occurred: {e}. Skipping this row.")
+
+print(mrts)
+print("mrt.csv 文件已創建成功！")
+
 
 
