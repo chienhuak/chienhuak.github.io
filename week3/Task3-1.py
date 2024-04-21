@@ -44,7 +44,7 @@ for mrt in mrts:
 
 for att in attractions:
   for mrt in mrts:
-    if mrt["MRT"] in att["info"]:
+    if mrt["SERIAL_NO"] == att["SERIAL_NO"]:
       att["mrt"] = mrt["MRT"]
       att["district"] = mrt["district"]  #景點中新增一個key放"行政區"
 #print(attractions)
