@@ -1,0 +1,359 @@
+nav {
+    font-size: 20px;
+    display : flex;
+    justify-content: space-between;
+    align-items : center;
+    padding: 1%;
+}
+
+ul {
+    display : flex;
+    max-width: 50%;
+    justify-content: space-evenly;
+}
+
+ul,li {
+    display: inline;
+}
+
+button {
+    display: none;
+}
+
+.popup-menu a {
+    display: none;
+}
+
+
+body {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0; 
+    /*border:dashed greenyellow 5px;*/
+}
+
+
+html {
+    margin: 0;
+    /*border: solid pink 5px;*/
+}
+
+
+#wrapper {
+    display: flex;
+    /*flex-direction: column;*/
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    /*border: solid orange 5px;*/
+    
+}
+
+#intro {
+    height: 250px;
+    width: 100%;
+    background-color: #e1ebf2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+
+#container {
+    max-width: 1200px;
+    /*border: solid pink 10px;*/
+    margin-top: 20px;
+}
+
+/*==================
+.promotion {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items : center;
+}
+
+
+.smallbox {
+    
+    display: inline-flex;
+    border: solid red 10px; 
+    width: 100%;
+    background-color: #a8d8e3;
+    
+    box-sizing: border-box;
+}
+
+.smallbox p {
+    padding-left: 10px;
+}
+
+.smallbox img {
+    max-height: 50px;
+    max-width: 80px;
+    
+}
+*/
+
+.promotion {
+    display: grid;
+    width: 1200px;
+    grid-template-columns: 1fr 1fr 1fr;
+    /**border: dashed gold 5px;
+    box-sizing: border-box;**/
+}
+
+.promotion div {
+    border: solid white 10px;
+}
+
+.smallbox {
+    display: flex;
+    background-color: #a8d8e3;
+}
+
+.smallbox img {
+    height:100%;
+    width: 100%;
+    max-height: 50px;
+    max-width: 80px;
+    object-fit: cover;
+    border: 0px;
+}
+
+.smallbox p {
+    padding-left: 10px;
+    width: 100%;
+}
+
+
+  
+.content .row {
+  display: grid;
+  width: 1200px;
+  width: 100%;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+}
+ 
+.content .box {
+  position: relative;
+  border: solid white 10px;
+}
+
+/*
+.content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    flex: 1 1;
+}
+
+.content .row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.box {
+    min-width: 16%;
+    display: inline-flexbox;
+    justify-content: space-between;
+    border: solid plum 10px;
+    position: relative;
+    flex: 1;
+    box-sizing: border-box;
+}
+
+.box:first-child {
+    min-width: 33%; 
+    flex:2;
+
+}
+
+.box:nth-child(6) {
+    min-width: 33%; 
+    flex:2;
+}
+*/
+
+
+.content .box img {
+    width:100%; /* 確保圖片填滿父容器 */
+    height:100%; /* 確保圖片填滿父容器 */
+    object-fit: cover; /* 使圖片比例不變並裁切超出部分 */
+}
+
+.box i {
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    font-size: 24px; 
+    z-index: 998;
+    color: goldenrod;
+    padding: 8px;
+}
+
+.overlay-text {
+    position: absolute;
+    width:100%;
+    bottom: 0%; /* 距離圖片下緣的距離 */
+    color: rgb(0, 0, 0);
+    text-align: center;
+    background-color: rgba(229, 222, 86, 0.5); /* 背景顏色及透明度 */
+    padding: 5px 0px; /* 文字框內的間距 */
+    margin: 0;
+}
+
+
+
+
+@media (max-width: 1200px){
+
+    #container {
+        width: 90%;
+    }
+
+    .promotion {
+        display: grid;
+        width: 100%;
+        grid-template-columns: auto auto;
+    }
+
+    .smallbox:nth-child(3) {
+        grid-column: span 2; /* 跨二欄 */
+    }
+
+    .content .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+
+    .box:nth-child(9), .box:nth-child(10) {
+        grid-column: span 2; /* 跨二欄 */
+    }
+    
+
+    /*
+    .smallbox {
+    
+        display: inline-flex;
+
+        width: 49%;
+    }
+    .promotion > .smallbox:last-child {
+    
+        display: inline-flex;
+
+        width: 100%;
+    }
+
+    .box {
+        min-width: 25%; 
+        flex:1;
+    }
+
+    .box:first-child {
+        min-width: 25%; 
+        flex:1;
+    }
+
+    .box:nth-child(6) {
+        min-width: 25%; 
+        flex:1;
+    }
+    */
+
+}
+
+
+
+
+@media (max-width: 600px){
+    nav ul {
+        display: none;
+    }
+    
+
+   .popup-btn {
+        display: block;
+        background-color: lavender;
+        border: solid pink;
+        border-radius: 10px;
+        padding: 0;
+        width:45px;
+        margin: 5px 0px;
+        z-index: 1000;
+    }
+    
+    .popup-btn img {
+        width: 100%;
+    }
+
+    /*
+    .smallbox {
+        width: 100%;
+    }
+    .box {
+        min-width: 100%; 
+    }
+    */
+
+    .promotion {
+        display: grid;
+        width: 100%;
+        grid-template-columns: 1fr;
+    }
+
+    .smallbox:nth-child(n) {
+        grid-column: span 1;
+    }
+
+    .content .row {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .box:nth-child(n) {
+        grid-column: span 1;
+    }
+
+
+    .sidebar {
+        display: none;
+        flex-direction: column;
+        height: 100%;
+        width: 100px;
+        position: fixed;
+        top: 0;
+        right: 0;
+        background-color: #ffffff;
+        padding: 20px;
+        border-left: solid pink 1px;
+        z-index: 999;
+        flex-wrap: wrap;
+    }
+
+    .popup-menu {
+        display: flex;
+        flex-direction: column; /* 垂直排列 */
+        align-items: flex-start; /* 對齊到容器的起始位置 */
+        border: solid blach 5px;
+    }
+    
+    .popup-menu a {
+        display: none;
+        padding: 20px 8px;
+        width: 100%;
+    }
+
+    /* 鼠标悬停时链接背景颜色 */
+    .popup-menu a:hover {
+        background-color: rgba(0,0,0,0.2);
+    }
+    
+
+}
+
