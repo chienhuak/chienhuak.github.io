@@ -1,70 +1,196 @@
 //Task 1
 
+const stations = [
+    {"n":'Xindian',"idx":0}, {"n":'Xindian City Hall',"idx":1}, {"n":'Qizhang',"idx":2}, {"n":'Dapinglin',"idx":3},
+    {"n":'Xiaobitan',"idx":1, "branch":"Qizhang"}, {"n":'Jingmei',"idx":4},{"n":'Wanlong',"idx":5}, {"n":'Gongguan',"idx":6},
+    {"n":'Taipower Building',"idx":7}, {"n":'Guting',"idx":8}, {"n":'Chiang Kai-Shek Memorial Hall',"idx":9},
+    {"n":'Xiaonanmen',"idx":10}, {"n":'Ximen',"idx":11}, {"n":'Beimen',"idx":12}, {"n":'Zhongshan',"idx":13},
+    {"n":'Songjiang Nanjing',"idx":14}, {"n":'Nanjing Fuxing',"idx":15}, {"n":'Taipei Arena',"idx":16},
+    {"n":'Nanjing Sanmin',"idx":17}, {"n":'Songshan',"idx":18}]
+
+
+function distance(start, end){
+
+    sb = false;
+    eb = false;
+
+    if ("branch" in start){
+        for (const station of stations){
+            if (station["n"] == start["branch"]){
+                sb = station;    //找出主線上的分支位置
+                break;
+            }
+        }
+    }
+
+    if ("branch" in end){
+        for (const station of stations){
+            if (station["n"] == end["branch"]){
+                eb = station;
+                break;
+            }
+        }
+    }
+
+    // console.log(start)
+    // console.log(end)
+    // console.log("sb "+sb.toString())
+    // console.log("tb "+eb.toString())
+
+    if (sb == false){
+        if (eb == false){
+            //console.log(start["idx"]);
+            return Math.abs(start["idx"]-end["idx"])   //都不在支線
+        }
+        else{
+            return Math.abs(start["idx"]-eb["idx"])+Math.abs(end["idx"])   //末站 在支線
+        }
+    }
+    else{
+        if (eb == false){
+            return Math.abs(sb["idx"]-end["idx"])+Math.abs(start["idx"])   //起站 在支線
+        }
+        else if (sb["n"] != eb["n"]){            
+            return Math.abs(sb["idx"]-destbranch["idx"])+Math.abs(start["idx"])+Math.abs(dest["idx"])   //兩點都在支線上
+        }
+        else{
+            return Math.abs(sb["idx"]-eb["idx"])
+        }
+    }
+
+
+    
+}
+
+
 function findAndPrint(messages, currentStation){
     // your code here
 
-    const stations = ['Xindian','Xindian City Hall','Qizhang','Xiaobitan','Dapinglin','Jingmei','Wanlong','Gongguan','Taipower Building','Guting','Chiang Kai-Shek Memorial Hall','Xiaonanmen','Ximen','Beimen','Zhongshan','Songjiang Nanjing','Nanjing Fuxing','Taipei Arena','Nanjing Sanmin','Songshan'];
-
     //擷取訊息
-    const extractedMessages = {};
+    const extractedMessages = [];
 
     for (const [name, message] of Object.entries(messages)) {   // 每個 messages 物件中的鍵值對
-        for (const station of stations) {    // 每個站名，使用正則表達式來匹配站名
-            const regex = new RegExp(station, 'gi'); // 不區分大小寫、全域匹配
+        for ( const station of stations) {    // 每個站名，使用正則表達式來匹配站名
+            const regex = new RegExp(station["n"], 'gi'); // 不區分大小寫、全域匹配
             if (regex.test(message)) {
-                extractedMessages[name] = station;
+                let obj = {};
+                obj["name"] = name;
+                obj["at"] = station;
+                extractedMessages.push(obj)
             }
         }
     }
     //console.log(extractedMessages);   //檢查擷取的訊息
-    //console.log(extractedMessages.Vivian);   //取得Vivian的車站
-
+    
+    myloc = ""
 
     //算出我的位置
-    for (let i=0;i<stations.length;i++){
-        if (currentStation.includes(stations[i])){
-            myloc = i;
+    for (const station of stations){
+        if (currentStation == station["n"]){
+            myloc = station
         }
     };
-    //console.log(myloc);
-    //console.log("我的車站："+stations[myloc]+"我的索引："+myloc);
+    //console.log(myloc);   //{ n: 'Jingmei', idx: 4 }
 
-    //計算最近的距離
-    descS = []
 
-    //字典不能用forEach
-    // extractedMessages.forEach(element => {
-    //     desc = Math.abs(stations.indexOf(extractedMessages.element)-myloc)
-    //     descS.push(desc)      
-    // });
+    //找最近的距離
+    let minSta = {"msg":null,"d":9999};
+    for (const msg of extractedMessages){
+        //console.log(distance(msg["at"],myloc))
+        let d=distance(msg["at"],myloc);
+        if(minSta["d"]>d) {
+            minSta["d"]=d;
+            minSta["msg"]=msg;
+        }
 
-    const keys = Object.keys(extractedMessages);
-
-    descS = []
-    for (i=0;i<keys.length;i++){
-        desc = Math.abs(stations.indexOf(extractedMessages[keys[i]])-myloc)   //不能寫stations.indexOf(extractedMessages.keys[i])
-        descS.push(desc)
     }
-    //console.log(Math.min(...descS))
-    console.log(keys[descS.indexOf(Math.min(...descS))])   //距離最近的人
 
+    console.log(minSta["msg"]["name"])
 }
-    const messages={
+
+const messages={
     "Bob":"I'm at Ximen MRT station.",
     "Mary":"I have a drink near Jingmei MRT station.",
     "Copper":"I just saw a concert at Taipei Arena.",
     "Leslie":"I'm at home near Xiaobitan station.",
     "Vivian":"I'm at Xindian station waiting for you."
     //,"John": "I'm at Xindian City Hall waiting for you."
-    };
-    findAndPrint(messages, "Wanlong"); // print Mary
-    findAndPrint(messages, "Songshan"); // print Copper
-    findAndPrint(messages, "Qizhang"); // print Leslie
-    findAndPrint(messages, "Ximen"); // print Bob
-    findAndPrint(messages, "Xindian City Hall"); // print Vivian
+};
+
+findAndPrint(messages, "Wanlong"); // print Mary
+findAndPrint(messages, "Songshan"); // print Copper
+findAndPrint(messages, "Qizhang"); // print Leslie
+findAndPrint(messages, "Ximen"); // print Bob
+findAndPrint(messages, "Xindian City Hall"); // print Vivian
+findAndPrint(messages, "Dapinglin"); // print Mary
+
+
+// function findAndPrint(messages, currentStation){
+//     // your code here
+
+//     const stations = ['Xindian','Xindian City Hall','Qizhang','Xiaobitan','Dapinglin','Jingmei','Wanlong','Gongguan','Taipower Building','Guting','Chiang Kai-Shek Memorial Hall','Xiaonanmen','Ximen','Beimen','Zhongshan','Songjiang Nanjing','Nanjing Fuxing','Taipei Arena','Nanjing Sanmin','Songshan'];
+
+//     //擷取訊息
+//     const extractedMessages = {};
+
+//     for (const [name, message] of Object.entries(messages)) {   // 每個 messages 物件中的鍵值對
+//         for (const station of stations) {    // 每個站名，使用正則表達式來匹配站名
+//             const regex = new RegExp(station, 'gi'); // 不區分大小寫、全域匹配
+//             if (regex.test(message)) {
+//                 extractedMessages[name] = station;
+//             }
+//         }
+//     }
+//     //console.log(extractedMessages);   //檢查擷取的訊息
+//     //console.log(extractedMessages.Vivian);   //取得Vivian的車站
+
+
+//     //算出我的位置
+//     for (let i=0;i<stations.length;i++){
+//         if (currentStation.includes(stations[i])){
+//             myloc = i;
+//         }
+//     };
+//     //console.log(myloc);
+//     //console.log("我的車站："+stations[myloc]+"我的索引："+myloc);
+
+//     //計算最近的距離
+//     descS = []
+
+//     //字典不能用forEach
+//     // extractedMessages.forEach(element => {
+//     //     desc = Math.abs(stations.indexOf(extractedMessages.element)-myloc)
+//     //     descS.push(desc)      
+//     // });
+
+//     const keys = Object.keys(extractedMessages);
+
+//     descS = []
+//     for (i=0;i<keys.length;i++){
+//         desc = Math.abs(stations.indexOf(extractedMessages[keys[i]])-myloc)   //不能寫stations.indexOf(extractedMessages.keys[i])
+//         descS.push(desc)
+//     }
+//     //console.log(Math.min(...descS))
+//     console.log(keys[descS.indexOf(Math.min(...descS))])   //距離最近的人
+
+// }
+//     const messages={
+//     "Bob":"I'm at Ximen MRT station.",
+//     "Mary":"I have a drink near Jingmei MRT station.",
+//     "Copper":"I just saw a concert at Taipei Arena.",
+//     "Leslie":"I'm at home near Xiaobitan station.",
+//     "Vivian":"I'm at Xindian station waiting for you."
+//     //,"John": "I'm at Xindian City Hall waiting for you."
+//     };
+//     findAndPrint(messages, "Wanlong"); // print Mary
+//     findAndPrint(messages, "Songshan"); // print Copper
+//     findAndPrint(messages, "Qizhang"); // print Leslie
+//     findAndPrint(messages, "Ximen"); // print Bob
+//     findAndPrint(messages, "Xindian City Hall"); // print Vivian
 
 
 
+console.log()
 //Task 2:
 
 // your code here, maybe
@@ -184,7 +310,7 @@ function book(consultants, hour, duration, criteria){
     book(consultants, 11, 2, "rate"); // No Service
     book(consultants, 14, 3, "price"); // John
 
-
+    console.log()
 //Task 3:
 
 function func(...data){
@@ -233,7 +359,7 @@ func("郭靜雅", "王立強", "郭林靜宜", "郭立恆", "林花花"); // pri
 func("郭宣雅", "林靜宜", "郭宣恆", "林靜花"); // print 沒有
 func("郭宣雅", "夏曼藍波安", "郭宣恆"); // print 夏曼藍波安
 
-
+console.log()
 //Task 4:尋找數列規則 0, 4, 8, 7, 11, 15, 14, 18, 22, 21, 25, ...
 
 function getNumber(index){
