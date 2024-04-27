@@ -2,3 +2,11 @@
 week3/ignore/
 
 week2/ignore/
+
+week4/__pycache__/
+
+*/__pycache__/
+
+*/ignore/
+
+*tempCodeRunnerFile.js
