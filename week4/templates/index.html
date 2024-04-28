@@ -4,30 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="{{url_for('static',path='/style.css')}}">
 </head>
+
 <body>
-    <form>
-        <div class="nav">
-            <h1>歡迎光臨，請輸入帳號密碼</h1>
-        </div>
+    <div class="nav">
+        <h1>歡迎光臨，請輸入帳號密碼</h1>
+    </div>
+    <form action="/signin" method="POST">
         <div class="container">
             <div class="login">
                 <h2>登入系統</h2>
-                <label for="id">帳號&nbsp;&nbsp;
-                    <input id="id" type="text">
+                <label for="username">帳號&nbsp;&nbsp;
+                    <input id="username" name="username" type="text" required>
                 </label>
                 <label for="password">密碼&nbsp;&nbsp;
-                    <input id="password" type="password">
+                    <input id="password" name="password" type="password" required>
                 </label>
                 <label for="agree">同意條款&nbsp;&nbsp;
-                    <input id="agree" type="checkbox">
+                    <input id="agree" name ="agree" type="checkbox">
                 </label>
                 <div><button type="button" onclick="inputcheck()">登入</button></div>
                 <h3 id="msg">Please check the checkbox first</h3>
             </div>
         </div>
     </form>
-    <script src="app.js"></script>
+    <!-- <script src="app.js"></script> -->
+<script src="{{url_for('static',path='/app.js')}}"></script>
 </body>
 </html>
