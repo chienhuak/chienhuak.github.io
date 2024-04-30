@@ -14,9 +14,6 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 # 設定 SessionMiddleware
 app.add_middleware(SessionMiddleware, secret_key="some-random-string")
 
-# @app.get("/")
-# async def root():
-#     return {"message": "Hello World"}
 
 @app.get("/",response_class=HTMLResponse)
 async def root(request:Request):
@@ -32,44 +29,37 @@ async def signin(request: Request, username: Optional[str] = Form(None), passwor
     # print("Received password:", password)
     if username == "test" and password == "test" and agree == True:
         # 登入成功，將使用者狀態設置為已登入
-        request.session['is_logged_in'] = True
+        request.session['SIGNED-IN'] = True
         #登入成功，導向到會員頁面
-        return RedirectResponse(url="/member")
+        #如果沒有提供 status_code 參數，則 FastAPI 將使用默認的狀態碼，但這可能不是你想要的。因此，你需要明確指定。 
+        return RedirectResponse(url="/member", status_code=status.HTTP_303_SEE_OTHER)
         # return templates.TemplateResponse("member.html",{"request":Request})
     if username is None or password is None:
         error_msg = "缺少帳號或密碼"
-        return RedirectResponse(url=f"/error?msg={error_msg}")
+        return RedirectResponse(url=f"/error?msg={error_msg}", status_code=status.HTTP_303_SEE_OTHER)
     else:
         # 登入失敗，返回登入頁面
         error_msg = "驗證失敗"
-        return RedirectResponse(url=f"/error?msg={error_msg}")
+        return RedirectResponse(url=f"/error?msg={error_msg}", status_code=status.HTTP_303_SEE_OTHER)
+
 
 @app.get("/member", response_class=HTMLResponse)
 async def member(request: Request):
     # 檢查使用者是否已登入
-    if not request.session.get('is_logged_in'):
+    if not request.session.get('SIGNED-IN'):
         return RedirectResponse(url="/")
     return templates.TemplateResponse("member.html", {"request": request})
 
-@app.post("/member", response_class=HTMLResponse)
-async def member(request: Request):
-    return templates.TemplateResponse("member.html", {"request": request})
 
-
-@app.post("/error", response_class=HTMLResponse)
-async def member(request: Request):
+@app.get("/error", response_class=HTMLResponse)
+async def error(request: Request):
     return templates.TemplateResponse("retry.html", {"request": request})
-
-
-@app.post("/error", response_class=HTMLResponse)
-async def error(request: Request, msg: str = None):
-    return templates.TemplateResponse("retry.html", {"request": request, "msg": msg})
 
 
 @app.get("/signout",response_class=HTMLResponse)
 async def signout(request:Request):
     # 登出時將使用者狀態設置為未登入
-    request.session['is_logged_in'] = False
+    request.session['SIGNED-IN'] = False
     return RedirectResponse(url="/")
 
 
