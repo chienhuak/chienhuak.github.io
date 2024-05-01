@@ -30,6 +30,19 @@
             </div>
         </div>
     </form>
+    <hr>
+    <form action="/math" method="GET">
+        <div class="container">
+            <div class="square">
+                <h2>計算正整數的平方</h2>
+                <label for="num">正整數&nbsp;&nbsp;
+                    <input id="num" name="num" type="text" >
+                </label>
+                <div><button type="button" onclick="calculate()" >計算</button></div>
+                <!-- <h3 id="msg">Please check the checkbox first</h3> -->
+            </div>
+        </div>
+    </form>
     <!-- <script src="app.js"></script> -->
 <script src="{{url_for('static',path='/app.js')}}"></script>
 </body>

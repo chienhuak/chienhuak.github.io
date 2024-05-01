@@ -7,3 +7,9 @@ function inputcheck(){
     }
     
 }
+
+
+function calculate(num){
+    document.forms[1].submit()
+
+}

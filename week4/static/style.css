@@ -12,8 +12,9 @@ body{
 
 .container{
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     justify-content: center;
+    height: 300px;
 }
 
 
@@ -49,5 +50,10 @@ a{
 h3{
     color: red;
     display: none;
+    justify-content: center;
+}
+
+.square div{
+    display: flex;
     justify-content: center;
 }

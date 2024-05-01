@@ -44,6 +44,19 @@ async def signin(request: Request, username: Optional[str] = Form(None), passwor
         return RedirectResponse(url="/error?msg=user_not_exist", status_code=status.HTTP_303_SEE_OTHER)
 
 
+@app.get("/math",response_class=HTMLResponse)
+async def math(request: Request, num: str):   #GET不會返回Form的值，會顯示在URL參數上面
+    if num.isdigit():
+         return RedirectResponse(url="/square/"+num)
+    else:
+        return RedirectResponse(url="/error?msg=not_positive_number", status_code=status.HTTP_303_SEE_OTHER)
+
+
+@app.get("/square/{num}", response_class=HTMLResponse)
+async def square(request: Request, num: Optional[int]=None):
+    return templates.TemplateResponse("square.html", {"request": request, "show_msg":num*num})
+
+
 @app.get("/member", response_class=HTMLResponse)
 async def member(request: Request):
     # 檢查使用者是否已登入
