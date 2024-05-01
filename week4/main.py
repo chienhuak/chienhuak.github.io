@@ -35,12 +35,13 @@ async def signin(request: Request, username: Optional[str] = Form(None), passwor
         return RedirectResponse(url="/member", status_code=status.HTTP_303_SEE_OTHER)
         # return templates.TemplateResponse("member.html",{"request":Request})
     if username is None or password is None:
-        error_msg = "缺少帳號或密碼"
-        return RedirectResponse(url=f"/error?msg={error_msg}", status_code=status.HTTP_303_SEE_OTHER)
+        # error_msg = "缺少帳號或密碼"
+        return RedirectResponse(url="/error?msg=no_username_or_password", status_code=status.HTTP_303_SEE_OTHER)
     else:
         # 登入失敗，返回登入頁面
-        error_msg = "驗證失敗"
-        return RedirectResponse(url=f"/error?msg={error_msg}", status_code=status.HTTP_303_SEE_OTHER)
+        # error_msg = "驗證失敗"
+        # return RedirectResponse(url=f"/error?msg={error_msg}", status_code=status.HTTP_303_SEE_OTHER)
+        return RedirectResponse(url="/error?msg=user_not_exist", status_code=status.HTTP_303_SEE_OTHER)
 
 
 @app.get("/member", response_class=HTMLResponse)
@@ -52,8 +53,8 @@ async def member(request: Request):
 
 
 @app.get("/error", response_class=HTMLResponse)
-async def error(request: Request):
-    return templates.TemplateResponse("retry.html", {"request": request})
+async def error(request: Request, msg : Optional[str]=""):
+    return templates.TemplateResponse("retry.html", {"request": request,"show_msg": msg })
 
 
 @app.get("/signout",response_class=HTMLResponse)
