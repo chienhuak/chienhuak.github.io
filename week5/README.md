@@ -48,7 +48,7 @@ of time.
 
 ![](https://github.com/chienhuak/chienhuak.github.io/blob/main/week5/screenshot/task5-3-6+.JPG)
 
-- [x] 
+- [x] SELECT rows where both username and password equal to test.
 
     Ans : AND
 
