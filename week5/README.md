@@ -5,60 +5,60 @@
 
 - [x] Create a new database named website.
 
-      
-![2-1](https://github.com/chienhuak/chienhuak.github.io/blob/main/week5/screenshot/task5-2-1.JPG)
+
+<img src="https://github.com/chienhuak/chienhuak.github.io/blob/main/week5/screenshot/task5-2-1.JPG" width="800">
 
 
 - [x] Create a new table named member, in the website database, designed as below:
 
-![](https://github.com/chienhuak/chienhuak.github.io/blob/main/week5/screenshot/task5-2-2.JPG)
+<img src="https://github.com/chienhuak/chienhuak.github.io/blob/main/week5/screenshot/task5-2-2.JPG" width="800">
 
 ## Task3 : SQL CRUD
 
 - [x] INSERT rows
 
-![](https://github.com/chienhuak/chienhuak.github.io/blob/main/week5/screenshot/task5-3-1.JPG)
+<img src="https://github.com/chienhuak/chienhuak.github.io/blob/main/week5/screenshot/task5-3-1.JPG" width="800">
 
 - [x] SELECT all rows
 
-![](https://github.com/chienhuak/chienhuak.github.io/blob/main/week5/screenshot/task5-3-2.JPG)
+<img src="https://github.com/chienhuak/chienhuak.github.io/blob/main/week5/screenshot/task5-3-2.JPG" width="800">
 
 - [x] SELECT all rows from the member table, in descending order of time.
 
     Ans : ORDER BY
 
-![](https://github.com/chienhuak/chienhuak.github.io/blob/main/week5/screenshot/task5-3-3.JPG)
+<img src="https://github.com/chienhuak/chienhuak.github.io/blob/main/week5/screenshot/task5-3-3.JPG" width="800">
 
 - [x] SELECT total 3 rows, second to fourth, from the member table, in descending order
 of time.
 
     Ans : LIMIT
 
-![](https://github.com/chienhuak/chienhuak.github.io/blob/main/week5/screenshot/task5-3-4.JPG)
+<img src="https://github.com/chienhuak/chienhuak.github.io/blob/main/week5/screenshot/task5-3-4.JPG" width="800">
 
 - [x] SELECT rows where username equals to test.
 
     Ans : WHERE
 
-![](https://github.com/chienhuak/chienhuak.github.io/blob/main/week5/screenshot/task5-3-5.JPG)
+<img src="https://github.com/chienhuak/chienhuak.github.io/blob/main/week5/screenshot/task5-3-5.JPG" width="800">
 
 - [x] SELECT rows where name includes the es keyword.
 
     Ans : LIKE
 
-![](https://github.com/chienhuak/chienhuak.github.io/blob/main/week5/screenshot/task5-3-6+.JPG)
+<img src="https://github.com/chienhuak/chienhuak.github.io/blob/main/week5/screenshot/task5-3-6+.JPG" width="800">
 
 - [x] SELECT rows where both username and password equal to test.
 
     Ans : AND
 
-![](https://github.com/chienhuak/chienhuak.github.io/blob/main/week5/screenshot/task5-3-7.JPG)
+<img src="https://github.com/chienhuak/chienhuak.github.io/blob/main/week5/screenshot/task5-3-7.JPG" width="800">
 
 - [x] UPDATE data in name column to test2 where username equals to test.
 
     Ans : UPDATE
 
-![](https://github.com/chienhuak/chienhuak.github.io/blob/main/week5/screenshot/task5-3-8++.JPG)
+<img src="https://github.com/chienhuak/chienhuak.github.io/blob/main/week5/screenshot/task5-3-8++.JPG" width="800">
 
 
 ## Task4 : Aggregation
