@@ -5,6 +5,8 @@ from fastapi.templating import Jinja2Templates
 from typing import Optional
 from typing import Annotated
 from starlette.middleware.sessions import SessionMiddleware
+import mysql.connector
+import os
 
 # PS C:\Users\User\Documents\GitHub\chienhuak.github.io\week6> python -m uvicorn main:app --port 8001 --reload
 
@@ -15,6 +17,16 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 # 設定 SessionMiddleware
 app.add_middleware(SessionMiddleware, secret_key="some-random-string")
 
+# 從環境變數中讀取 MySQL 密碼
+mysql_password = os.environ.get("MYSQL_PASSWORD")
+print(mysql_password)
+# 建立 MySQL 連接
+mydb = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password=mysql_password,
+    database="website"
+    )
 
 @app.get("/",response_class=HTMLResponse)
 async def root(request:Request):
@@ -37,6 +49,27 @@ async def signin(request: Request, username: Optional[str] = Form(None), passwor
         # 登入失敗，返回登入頁面
         # error_msg = "驗證失敗"
         # return RedirectResponse(url=f"/error?msg={error_msg}", status_code=status.HTTP_303_SEE_OTHER)
+        return RedirectResponse(url="/error?msg=user_not_exist", status_code=status.HTTP_303_SEE_OTHER)
+
+
+@app.post("/signup",response_class=HTMLResponse)
+async def signup(request: Request, name: Optional[str] = Form(None), username0: Optional[str] = Form(None), password0: Optional[str] = Form(None), agree: bool = Form(...)):
+    if username0 and password0 and agree :
+        # 建立 cursor 對象
+        mycursor = mydb.cursor()
+
+        # 執行 SQL 插入語句
+        mycursor.execute(f"INSERT INTO member (name, username, password) VALUES ('{name}', '{username0}', '{password0}')")
+
+        # 提交事務
+        mydb.commit()
+        # 登入成功，將使用者狀態設置為已登入
+        request.session['SIGNED-IN'] = True 
+        return RedirectResponse(url="/member", status_code=status.HTTP_303_SEE_OTHER)
+    if username0 is None or password0 is None:
+        # error_msg = "缺少帳號或密碼"
+        return RedirectResponse(url="/error?msg=no_username_or_password", status_code=status.HTTP_303_SEE_OTHER)
+    else:
         return RedirectResponse(url="/error?msg=user_not_exist", status_code=status.HTTP_303_SEE_OTHER)
 
 
