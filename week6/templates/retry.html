@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="{{url_for('static',path='/style.css')}}">
+</head>
+
+<body>
+    <div class="nav">
+        <h1>失敗頁面</h1>
+    </div>
+    <form>
+        <div class="container">
+            <div class="login">
+                <h2 id="errormsg">{{show_msg}}</h2> <!-- 帳號、或密碼輸入錯誤 -->
+            </div>
+        </div>
+    </form>
+    <!-- <script src="app.js"></script> -->
+<script src="{{url_for('static',path='/app.js')}}"></script>
+</body>
+</html>

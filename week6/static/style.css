@@ -1,0 +1,59 @@
+body{
+    margin: 0px;
+}
+
+.nav{
+    background-color: rgb(12, 25, 47);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container{
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    height: 320px;
+}
+
+
+label{
+    display: flex;
+    font-size: 18.72px;
+    margin: 18.72px 0px;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif ;
+    justify-content: center;
+}
+
+.login{
+    display: block;
+    /* border: 5px solid pink; */
+}
+
+h2{
+    display: flex;
+    justify-content: center;
+}
+
+a{
+    display: flex;
+    justify-content: center;
+}
+
+.login div{
+    display: flex;
+    justify-content: center;
+}
+
+h3{
+    color: red;
+    display: none;
+    justify-content: center;
+}
+
+.square div{
+    display: flex;
+    justify-content: center;
+}

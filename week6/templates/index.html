@@ -1,0 +1,43 @@
+{% include "header.html" %}
+{% include "navbar.html" %}
+
+<form action="/signup" method="POST">
+    <div class="container">
+        <div class="login">
+            <h2>註冊帳號</h2>
+            <label for="name">姓名&nbsp;&nbsp;
+                <input id="name" name="name" type="text" required>
+            </label>
+            <label for="username0">帳號&nbsp;&nbsp;
+                <input id="username0" name="username0" type="text" required>
+            </label>
+            <label for="password0">密碼&nbsp;&nbsp;
+                <input id="password0" name="password0" type="password" required>
+            </label>
+            <label for="agree">同意條款&nbsp;&nbsp;
+                <input id="agree" name ="agree" type="checkbox">
+            </label>
+            <div><button type="button" onclick="inputcheck()">註冊</button></div>
+            <h3 id="msg">Please check the checkbox first</h3>
+        </div>
+    </div>
+</form>
+<hr>
+<form action="/signin" method="POST">
+    <div class="container">
+        <div class="login">
+            <h2>登入系統</h2>
+            <label for="username">帳號&nbsp;&nbsp;
+                <input id="username" name="username" type="text" required>
+            </label>
+            <label for="password">密碼&nbsp;&nbsp;
+                <input id="password" name="password" type="password" required>
+            </label>
+            <div><button type="button" onclick="signin()">登入</button></div>
+        </div>
+    </div>
+</form>
+
+
+
+{% include "footer.html" %}
