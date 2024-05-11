@@ -57,7 +57,9 @@ async def signup(request: Request, name: Optional[str] = Form(None), username0: 
     if username0 and password0 and agree :
         # 建立 cursor 對象
         with mydb.cursor() as mycursor :
-            mycursor.execute(f"SELECT * FROM member where username = '{username0}'")
+            query = "SELECT * FROM member where username = %s"
+            inputs = (username0,)
+            mycursor.execute(query, inputs)
             result = mycursor.fetchall()
         
             if result:
@@ -65,7 +67,10 @@ async def signup(request: Request, name: Optional[str] = Form(None), username0: 
         
             else:
                 # 執行 SQL 插入語句
-                mycursor.execute(f"INSERT INTO member (name, username, password) VALUES ('{name}', '{username0}', '{password0}')")
+                query = "INSERT INTO member (name, username, password) VALUES (%s, %s, %s)"
+                inputs = (name, username0, password0)
+
+                mycursor.execute(query, inputs)
 
                 # 提交事務
                 mydb.commit()
