@@ -134,8 +134,16 @@ async def member(request: Request):
         return RedirectResponse(url="/")
     else:
         name = request.session['NAME']
-        with mydb.cursor() as mycursor :
-            query = "SELECT name, content, message.time FROM message JOIN member ON message.member_id = member.id"
+        with mydb.cursor(buffered=True,dictionary=True) as mycursor :
+            query = """
+            WITH board AS(
+                SELECT member.name, message.content, message.time, message.id, parent_id, LPAD(ifnull(parent_id,message.id), 3, '0') AS level
+                FROM message 
+                JOIN member ON message.member_id = member.id 
+            )
+            SELECT * FROM board 
+            ORDER BY level,id
+            """
             mycursor.execute(query)
             result = mycursor.fetchall()
             # 將 None 替換為 null

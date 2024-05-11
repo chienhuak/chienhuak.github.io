@@ -10,17 +10,43 @@ body{
     justify-content: center;
 }
 
-.container{
+.signup_container{
     display: flex;
     /* align-items: center; */
     justify-content: center;
     height: 320px;
 }
 
-table{
+.container{
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+}
+
+.signup{
+    display: block;
+}
+
+.post_msg{
+    display: block;
+}
+
+div{
     display: flex;
     justify-content: center;
 }
+
+li{
+    margin: 10px;
+}
+
+.li_message{
+    border: 2px solid rgb(216, 185, 190); 
+    background-color: pink;
+    border-radius: 8px;
+    padding: 1px 2px;
+}
+  
 
 label{
     display: flex;
@@ -50,6 +76,7 @@ a{
     display: flex;
     justify-content: center;
 }
+
 
 h3{
     color: red;
