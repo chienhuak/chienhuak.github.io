@@ -17,6 +17,10 @@ body{
     height: 320px;
 }
 
+table{
+    display: flex;
+    justify-content: center;
+}
 
 label{
     display: flex;

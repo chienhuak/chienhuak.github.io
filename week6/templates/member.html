@@ -20,6 +20,17 @@
             </div>
         </div>
     </form>
+    <div>
+        <table border="1">
+            {% for x in show_msgboard %}
+            <tr>
+              <td>{{ x[0] }}</td> 
+              <td>{{ x[1] }}</td>
+              <td>{{ x[2] }}</td>
+            </tr>
+            {% endfor %}
+          </table> 
+    </div>
     <!-- <script src="app.js"></script> -->
 <script src="{{url_for('static',path='/app.js')}}"></script>
 </body>

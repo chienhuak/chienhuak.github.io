@@ -134,7 +134,15 @@ async def member(request: Request):
         return RedirectResponse(url="/")
     else:
         name = request.session['NAME']
-        return templates.TemplateResponse("member.html", {"request": request, "show_name":name})
+        with mydb.cursor() as mycursor :
+            query = "SELECT name, content, message.time FROM message JOIN member ON message.member_id = member.id"
+            mycursor.execute(query)
+            result = mycursor.fetchall()
+            # 將 None 替換為 null
+            # result_null = [tuple('null' if val is None else val for val in row) for row in result]
+            # print(result_null)
+        return templates.TemplateResponse("member.html", {"request": request, "show_name":name, "show_msgboard":result})
+
 
 
 @app.get("/error", response_class=HTMLResponse)
