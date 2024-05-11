@@ -35,9 +35,15 @@ async def root(request:Request):
 
 @app.post("/signin",response_class=HTMLResponse)
 async def signin(request: Request, username: Optional[str] = Form(None), password: Optional[str] = Form(None)):
-    if username == "test" and password == "test":
+    with mydb.cursor() as mycursor :
+        query = "SELECT * FROM member where username = %s AND password = %s"
+        inputs = (username,password)
+        mycursor.execute(query, inputs)
+        result = mycursor.fetchall()
+    if result:
         # 登入成功，將使用者狀態設置為已登入
         request.session['SIGNED-IN'] = True
+        request.session['NAME'] = result[0][1]
         #登入成功，導向到會員頁面
         #如果沒有提供 status_code 參數，則 FastAPI 將使用默認的狀態碼，但這可能不是你想要的。因此，你需要明確指定。 
         return RedirectResponse(url="/member", status_code=status.HTTP_303_SEE_OTHER)
@@ -69,7 +75,6 @@ async def signup(request: Request, name: Optional[str] = Form(None), username0: 
                 # 執行 SQL 插入語句
                 query = "INSERT INTO member (name, username, password) VALUES (%s, %s, %s)"
                 inputs = (name, username0, password0)
-
                 mycursor.execute(query, inputs)
 
                 # 提交事務
@@ -127,7 +132,9 @@ async def member(request: Request):
     # 檢查使用者是否已登入
     if not request.session.get('SIGNED-IN'):
         return RedirectResponse(url="/")
-    return templates.TemplateResponse("member.html", {"request": request})
+    else:
+        name = request.session['NAME']
+        return templates.TemplateResponse("member.html", {"request": request, "show_name":name})
 
 
 @app.get("/error", response_class=HTMLResponse)
