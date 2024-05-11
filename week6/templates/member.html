@@ -30,7 +30,11 @@
     <div>
         <ul>
             {% for x in show_msgboard %}
+              {% if x['name'] == show_name%}
+              <li>{{ x['name'] }} : <span class="li_message">{{ x['content'] }}</span><a class="delete_btn" href="/deleteMessage/{{x['id']}}">x</a>
+              {% else %}
               <li>{{ x['name'] }} : <span class="li_message">{{ x['content'] }}</span>
+              {% endif %}
             {% endfor %}
         </ul> 
     </div>

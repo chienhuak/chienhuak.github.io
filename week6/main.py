@@ -143,6 +143,23 @@ async def createMessage(request: Request, say: Optional[str] = Form(None)):
 
     return RedirectResponse(url="/member", status_code=status.HTTP_303_SEE_OTHER)
 
+@app.get("/deleteMessage/{message_id}", response_class=HTMLResponse)
+async def deleteMessage(message_id: int):
+    try:
+        print(message_id)
+        with mydb.cursor() as mycursor :
+            query = "DELETE FROM message WHERE id =%s"
+            inputs = (message_id,)
+            mycursor.execute(query, inputs)
+
+            # 提交事務
+            mydb.commit()
+
+        return RedirectResponse(url="/member", status_code=status.HTTP_303_SEE_OTHER)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 
 @app.get("/member", response_class=HTMLResponse)
 async def member(request: Request):
@@ -179,7 +196,7 @@ async def member(request: Request):
 
 @app.get("/error", response_class=HTMLResponse)
 async def error(request: Request, msg : Optional[str]=""):
-    return templates.TemplateResponse("retry.html", {"request": request,"show_msg": msg })
+    return templates.TemplateResponse("retry.html", {"request": request,"show_msg": msg }) 
 
 
 @app.get("/signout",response_class=HTMLResponse)
