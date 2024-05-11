@@ -56,16 +56,23 @@ async def signin(request: Request, username: Optional[str] = Form(None), passwor
 async def signup(request: Request, name: Optional[str] = Form(None), username0: Optional[str] = Form(None), password0: Optional[str] = Form(None), agree: bool = Form(...)):
     if username0 and password0 and agree :
         # 建立 cursor 對象
-        mycursor = mydb.cursor()
+        with mydb.cursor() as mycursor :
+            mycursor.execute(f"SELECT * FROM member where username = '{username0}'")
+            result = mycursor.fetchall()
+        
+            if result:
+                return RedirectResponse(url="/error?msg=user_exist", status_code=status.HTTP_303_SEE_OTHER)
+        
+            else:
+                # 執行 SQL 插入語句
+                mycursor.execute(f"INSERT INTO member (name, username, password) VALUES ('{name}', '{username0}', '{password0}')")
 
-        # 執行 SQL 插入語句
-        mycursor.execute(f"INSERT INTO member (name, username, password) VALUES ('{name}', '{username0}', '{password0}')")
+                # 提交事務
+                mydb.commit()
+                # 登入成功，將使用者狀態設置為已登入
+                request.session['SIGNED-IN'] = True 
+                return RedirectResponse(url="/member", status_code=status.HTTP_303_SEE_OTHER)
 
-        # 提交事務
-        mydb.commit()
-        # 登入成功，將使用者狀態設置為已登入
-        request.session['SIGNED-IN'] = True 
-        return RedirectResponse(url="/member", status_code=status.HTTP_303_SEE_OTHER)
     if username0 is None or password0 is None:
         # error_msg = "缺少帳號或密碼"
         return RedirectResponse(url="/error?msg=no_username_or_password", status_code=status.HTTP_303_SEE_OTHER)
