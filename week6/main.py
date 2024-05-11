@@ -44,6 +44,7 @@ async def signin(request: Request, username: Optional[str] = Form(None), passwor
         # 登入成功，將使用者狀態設置為已登入
         request.session['SIGNED-IN'] = True
         request.session['NAME'] = result[0][1]
+        request.session['USERID'] = result[0][0]
         #登入成功，導向到會員頁面
         #如果沒有提供 status_code 參數，則 FastAPI 將使用默認的狀態碼，但這可能不是你想要的。因此，你需要明確指定。 
         return RedirectResponse(url="/member", status_code=status.HTTP_303_SEE_OTHER)
@@ -69,7 +70,7 @@ async def signup(request: Request, name: Optional[str] = Form(None), username0: 
             result = mycursor.fetchall()
         
             if result:
-                return RedirectResponse(url="/error?msg=user_exist", status_code=status.HTTP_303_SEE_OTHER)
+                return RedirectResponse(url="/error?msg=repeated_username", status_code=status.HTTP_303_SEE_OTHER)
         
             else:
                 # 執行 SQL 插入語句
@@ -127,6 +128,22 @@ async def square(request: Request, num: Optional[int]=None):
     return templates.TemplateResponse("square.html", {"request": request, "show_msg":num*num})
 
 
+@app.post("/createMessage", response_class=HTMLResponse)
+async def createMessage(request: Request, say: Optional[str] = Form(None)):
+    if not say:
+        return RedirectResponse(url="/member", status_code=status.HTTP_303_SEE_OTHER)
+
+    with mydb.cursor() as mycursor :
+        query = "INSERT INTO message (member_id, content) VALUES (%s, %s)"
+        inputs = (request.session['USERID'], say )
+        mycursor.execute(query, inputs)
+
+        # 提交事務
+        mydb.commit()
+
+    return RedirectResponse(url="/member", status_code=status.HTTP_303_SEE_OTHER)
+
+
 @app.get("/member", response_class=HTMLResponse)
 async def member(request: Request):
     # 檢查使用者是否已登入
@@ -146,6 +163,13 @@ async def member(request: Request):
             """
             mycursor.execute(query)
             result = mycursor.fetchall()
+
+            # px=None
+            # for x in result:
+            #     if px and x['parent_id']:
+            #         x['reply']=True               
+            #     px=x
+
             # 將 None 替換為 null
             # result_null = [tuple('null' if val is None else val for val in row) for row in result]
             # print(result_null)
