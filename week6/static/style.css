@@ -58,6 +58,11 @@ li{
     text-decoration: dashed;
 }
 
+.reply .li_message{
+    border: 2px solid rgb(236, 234, 234); 
+    background-color: rgb(247, 227, 230);
+}
+
 label{
     display: flex;
     font-size: 18.72px;
