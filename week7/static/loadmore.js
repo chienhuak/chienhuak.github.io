@@ -7,7 +7,7 @@ function username() {
     .then(data => {
         console.log(data)
         if (data.data) {            
-            name_result.innerText = `${data.data[0].name} (${data.data[0].username})`; //加到頁面上
+            name_result.innerText = `${data.data.name} (${data.data.username})`; //加到頁面上
         }
         else {
             name_result.innerHTML = "找不到 &#128517;"

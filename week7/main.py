@@ -65,13 +65,14 @@ async def search_name(username:Optional[str]):
     try:
         with mydb.cursor(buffered=True,dictionary=True) as mycursor :
             query = """
-                SELECT name, username
+                SELECT name, username, id
                 FROM member 
                 WHERE username LIKE %s 
                 """
             search_pattern = f"%{username}%"
             mycursor.execute(query, (search_pattern,))
-            result = mycursor.fetchall()
+            result = mycursor.fetchone()
+            print(result)
             if result:
                 return {"data": result}
             else:
