@@ -1,0 +1,113 @@
+body{
+    margin: 0px;
+}
+
+.nav{
+    background-color: rgb(12, 25, 47);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signup_container{
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    height: 320px;
+}
+
+.container{
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+}
+
+.signup{
+    display: block;
+}
+
+.post_msg{
+    display: block;
+}
+
+.sname{
+    display: block;
+}
+
+div{
+    display: flex;
+    justify-content: center;
+}
+
+li{
+    margin: 10px;
+}
+
+.li_message{
+    display: inline-block;
+    border: 2px solid rgb(216, 185, 190); 
+    background-color: pink;
+    border-radius: 8px;
+    padding: 1px 2px;
+}
+
+.delete_btn {
+    display: inline-block;
+    padding: 0px 5px;
+    border-radius: 10px;
+    background-color: rgb(192, 255, 255);
+    border: 2px solid rgb(185, 209, 216); 
+    margin-left: 8px;
+    text-decoration: dashed;
+}
+
+.reply .li_message{
+    border: 2px solid rgb(236, 234, 234); 
+    background-color: rgb(247, 227, 230);
+}
+
+label{
+    display: flex;
+    font-size: 18.72px;
+    margin: 18.72px 0px;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif ;
+    justify-content: center;
+}
+
+.login{
+    display: block;
+    /* border: 5px solid pink; */
+}
+
+h2{
+    display: flex;
+    justify-content: center;
+}
+
+a{
+    display: flex;
+    justify-content: center;
+}
+
+.login div{
+    display: flex;
+    justify-content: center;
+}
+
+
+h3{
+    color: red;
+    display: none;
+    justify-content: center;
+}
+
+.square div{
+    display: flex;
+    justify-content: center;
+}
+
+button{
+    margin: 5px;
+}

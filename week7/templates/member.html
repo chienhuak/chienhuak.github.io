@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="{{url_for('static',path='/style.css')}}">
+</head>
+
+<body>
+    <div class="nav">
+        <h1>歡迎光臨，這是會員頁</h1>
+    </div>
+    <!-- <form action="createMessage" method="POST"> -->
+    <div class="container">
+        <div class="login">
+            <h2>{{show_name}} 恭喜您，成功登入系統</h2>
+            <div><a href="/signout">登出系統</a></div>
+        </div>
+    </div>
+    <hr>
+    <div class="sname">
+        <h2>查詢會員姓名</h2>
+        <label for="username">我想找&nbsp;&nbsp;
+            <input id="username" name="username" type="text" required> 
+            <button onclick="username()" type="button">查詢</button>
+        </label>
+        
+        <div><h2 id="name_result"></h2></div>
+    </div>
+    <hr>
+    <div class="sname">
+        <h2>更新我的姓名</h2>
+        <label for="username">我想變&nbsp;&nbsp;
+            <input id="update_name" name="username" type="text" required>
+            <button onclick="update_name()" type="button">更新</button>
+        </label>
+        <div></div>
+        <div><h2 id="update_result"></h2></div>
+    </div>
+    <hr>
+    <form action="createMessage" method="POST">    
+        <div class="post_msg">
+            <h2>快來留言吧</h2>
+            <label for="say">我想說&nbsp;&nbsp;
+                <input id="say" name="say" type="text" required>
+                <button type="submit">送出</button>
+            </label>
+            <div></div>
+        </div>
+    </form>
+    <div>
+        <ul id="message-list"></ul>
+    </div>
+    
+    <!-- <script src="app.js"></script> -->
+<script src="{{url_for('static',path='/app.js')}}"></script>
+<script src="{{url_for('static',path='/loadmore.js')}}"></script>
+</body>
+</html>
