@@ -31,7 +31,7 @@ function update_name() {
     })
     .then(response => response.json())
     .then(data => {
-        if (data.run == "ok") {            
+        if (data.ok) {            
             name_result.innerText = "Updated"; 
         }
         else {

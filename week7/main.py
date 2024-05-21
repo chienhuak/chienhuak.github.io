@@ -37,7 +37,7 @@ mydb = mysql.connector.connect(
 # 修改姓名
 @app.patch("/api/member", response_class=JSONResponse)
 async def update_name(request: Request, me:dict):
-    #print(me)
+    print(me)
     try:
         with mydb.cursor(buffered=True,dictionary=True) as mycursor :
             query = """
@@ -48,10 +48,10 @@ async def update_name(request: Request, me:dict):
             
             mycursor.execute(query, (me['name'],request.session['USERID']))
             mydb.commit()
-            return {"run":"ok"}
+            return {"ok":"true"}
 
     except error as e:
-        return {"run": "fail"}
+        return {"error": "true"}
     
 
 
