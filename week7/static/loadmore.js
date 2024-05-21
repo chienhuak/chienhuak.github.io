@@ -1,6 +1,15 @@
-function username() {
+async function username() {
+
+    let response  = await fetch("/api/user")
+    let result = response.json()
+    if (result.error){
+        windows.location = "/"
+        return;
+    }
+
+
     const unm = document.getElementById("username").value
-    const name_result = document.getElementById("name_result")
+    const name_result = document.getElementById("name_result")   
     // 發送請求到後端，加載初始數據
     fetch("/api/member?username="+unm)  //fetch("http://127.0.0.1:8001/member")
     .then(response => response.json())
@@ -31,8 +40,13 @@ function update_name() {
     })
     .then(response => response.json())
     .then(data => {
+        console.log(data)
         if (data.ok) {            
             name_result.innerText = "Updated"; 
+        }
+        else if (data.error){
+            windows.location = "/"
+            return;
         }
         else {
             name_result.innerHTML = "Update Fail";

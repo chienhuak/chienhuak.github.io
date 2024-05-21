@@ -34,9 +34,22 @@ mydb = mysql.connector.connect(
     )
 
 
+@app.get("/api/user", response_class=JSONResponse)
+async def member(request: Request):
+    print(request.session['SIGNED-IN'])
+    if request.session['SIGNED-IN'] == True:
+        return {"data":{"name":request.session['NAME'],"id":request.session['USERID']}}
+    else:
+        return {"error":True}
+
+
+
 # 修改姓名
 @app.patch("/api/member", response_class=JSONResponse)
 async def update_name(request: Request, me:dict):
+    if not request.session['SIGNED-IN']:
+        return {"error":"log out"}
+
     print(me)
     try:
         with mydb.cursor(buffered=True,dictionary=True) as mycursor :
@@ -57,7 +70,10 @@ async def update_name(request: Request, me:dict):
 
 # 查詢會員功能
 @app.get("/api/member", response_class=JSONResponse)
-async def search_name(username:Optional[str]):
+async def search_name(request: Request, username:Optional[str]):
+    if not request.session['SIGNED-IN']:
+        return {"error":"log out"}
+
     print(username)
     if not username:
         return {"users": None}
@@ -233,7 +249,8 @@ async def error(request: Request, msg : Optional[str]=""):
 @app.get("/signout",response_class=HTMLResponse)
 async def signout(request:Request):
     # 登出時將使用者狀態設置為未登入
-    request.session['SIGNED-IN'] = False
+    # request.session['SIGNED-IN'] = False
+    request.session={}
     return RedirectResponse(url="/")
 
 
