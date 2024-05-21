@@ -48,7 +48,7 @@ async def member(request: Request):
 @app.patch("/api/member", response_class=JSONResponse)
 async def update_name(request: Request, me:dict):
     if not request.session['SIGNED-IN']:
-        return {"error":"log out"}
+        return {"error": "true"}
 
     print(me)
     try:
@@ -72,11 +72,11 @@ async def update_name(request: Request, me:dict):
 @app.get("/api/member", response_class=JSONResponse)
 async def search_name(request: Request, username:Optional[str]):
     if not request.session['SIGNED-IN']:
-        return {"error":"log out"}
+        return {"data": None}  # 沒有登入
 
     print(username)
     if not username:
-        return {"users": None}
+        return {"data": None}  # 沒有輸入資料
 
     try:
         with mydb.cursor(buffered=True,dictionary=True) as mycursor :
@@ -92,7 +92,7 @@ async def search_name(request: Request, username:Optional[str]):
             if result:
                 return {"data": result}
             else:
-                return {"data": None}
+                return {"data": None}  # 搜尋不到結果
 
     except error as e:
         raise HTTPException(status_code=500, detail=e)
