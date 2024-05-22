@@ -111,3 +111,7 @@ h3{
 button{
     margin: 5px;
 }
+
+ul div{
+    color: gray;
+}

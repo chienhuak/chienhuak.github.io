@@ -56,6 +56,7 @@ function update_name() {
 
 
 let rowCount = 0; 
+let noMoreMessages = false;
 
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -101,10 +102,21 @@ function loadMoreMessages() {
     fetch("/loadmsg?offset=" + rowCount)
         .then(response => response.json())
         .then(data => {
-            // 將新獲取的留言附加到當前頁面上
-            console.log(data)
-            appendMessagesToPage(data);
-            rowCount += data.length
+            // 檢查是否有新的留言
+            if (data.length > 0  && noMoreMessages == false){
+                // 將新獲取的留言附加到當前頁面上
+                console.log(data)
+                appendMessagesToPage(data);
+                rowCount += data.length
+            }
+            else if (noMoreMessages == false){
+                // 如果沒有更多留言，顯示提示信息
+                const messageList = document.querySelector('#message-list')
+                const noMoreMessagesElement = document.createElement("div");
+                noMoreMessagesElement.textContent = "沒有更多留言了";
+                messageList.appendChild(noMoreMessagesElement);
+                noMoreMessages = true;
+            }
         })
         .catch(error => console.error("Error loading more messages: ", error));
     }
