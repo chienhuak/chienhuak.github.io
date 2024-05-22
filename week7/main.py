@@ -48,7 +48,7 @@ async def member(request: Request):
 @app.patch("/api/member", response_class=JSONResponse)
 async def update_name(request: Request, me:dict):
     if not request.session['SIGNED-IN']:
-        return {"error": "true"}
+        return {"error": True}
 
     print(me)
     try:
@@ -61,10 +61,10 @@ async def update_name(request: Request, me:dict):
             
             mycursor.execute(query, (me['name'],request.session['USERID']))
             mydb.commit()
-            return {"ok":"true"}
+            return {"ok":True}
 
     except error as e:
-        return {"error": "true"}
+        return {"error": True}
     
 
 
@@ -250,7 +250,8 @@ async def error(request: Request, msg : Optional[str]=""):
 async def signout(request:Request):
     # 登出時將使用者狀態設置為未登入
     # request.session['SIGNED-IN'] = False
-    request.session={}
+    # 清空 session 以登出
+    request.session.clear()
     return RedirectResponse(url="/")
 
 
